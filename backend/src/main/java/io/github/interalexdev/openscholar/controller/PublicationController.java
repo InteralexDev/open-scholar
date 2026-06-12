@@ -60,4 +60,15 @@ public class PublicationController {
         return publicationService.getPublicationDetails(openAlexId);
     }
 
+    @GetMapping("/{openAlexId}/export/json")
+    @Operation(
+            summary = "Export publication metadata as JSON",
+            description = "Retrieves publication metadata from OpenAlex and returns it as JSON without saving it to the local history."
+    )
+    public PublicationMetadata exportPublicationJson(
+            @PathVariable String openAlexId
+    ) {
+        return publicationService.exportPublicationJson(openAlexId);
+    }
+
 }

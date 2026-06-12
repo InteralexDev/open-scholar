@@ -40,5 +40,9 @@ public class PublicationService {
         return publication;
     }
 
+    public PublicationMetadata exportPublicationJson(String openAlexId) {
+        OpenAlexWorkDto dto = openAlexClient.getPublicationDetails(openAlexId);
+        return openAlexMapper.toPublicationMetadata(dto);
+    }
 
 }
