@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 
+import java.util.regex.Matcher;
+
 /**
  * Client responsible for communicating with the OpenAlex REST API.
  */
@@ -38,4 +40,5 @@ public class OpenAlexClient {
                 .retrieve()
                 .body(OpenAlexSearchResponse.class);
     }
+
 }
