@@ -5,6 +5,7 @@ import io.github.interalexdev.openscholar.service.PublicationService;
 import io.github.interalexdev.openscholar.service.ViewedPublicationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,7 +29,7 @@ public class PublicationController {
      * @param query user search query
      * @return up to 10 matching publications
      */
-    @GetMapping("/search")
+    @GetMapping(path = "/search", produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(
             summary = "Search publications",
             description = "Searches scholarly publications using the OpenAlex API and returns up to 10 matching results."
@@ -43,13 +44,13 @@ public class PublicationController {
             summary = "Get recently viewed publications",
             description = "Returns the 10 most recently viewed publications stored locally in the database."
     )
-    @GetMapping("/viewed")
+    @GetMapping(path = "/viewed", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<PublicationMetadata> getRecentlyViewedPublications() {
         System.out.println("VIEWED ENDPOINT CALLED");
         return viewedPublicationService.getRecentlyViewedPublications();
     }
 
-    @GetMapping("/{openAlexId}")
+    @GetMapping(path = "/{openAlexId}", produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(
             summary = "Get publication details",
             description = "Retrieves the details of a publication from OpenAlex."
@@ -60,7 +61,7 @@ public class PublicationController {
         return publicationService.getPublicationDetails(openAlexId);
     }
 
-    @GetMapping("/{openAlexId}/export/json")
+    @GetMapping(path = "/{openAlexId}/export/json", produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(
             summary = "Export publication metadata as JSON",
             description = "Retrieves publication metadata from OpenAlex and returns it as JSON without saving it to the local history."
@@ -71,7 +72,7 @@ public class PublicationController {
         return publicationService.exportPublicationJson(openAlexId);
     }
 
-    @GetMapping("/{openAlexId}/export/dublin-core")
+    @GetMapping(path = "/{openAlexId}/export/dublin-core", produces = MediaType.APPLICATION_XML_VALUE)
     @Operation(
             summary = "Export publication as Dublin Core XML",
             description = "Retrieves publication metadata from OpenAlex and exports it as Dublin Core XML without saving it locally."
