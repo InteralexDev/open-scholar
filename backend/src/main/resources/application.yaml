@@ -4,3 +4,15 @@ server:
 spring:
   application:
     name: open-scholar-backend
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/openscholar
+    username: postgres
+    password: postgres
+
+  jpa:
+    open-in-view: false
+
+logging:
+  level:
+    org.springframework.jdbc: info
