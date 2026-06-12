@@ -46,7 +46,6 @@ public class PublicationController {
     )
     @GetMapping(path = "/viewed", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<PublicationMetadata> getRecentlyViewedPublications() {
-        System.out.println("VIEWED ENDPOINT CALLED");
         return viewedPublicationService.getRecentlyViewedPublications();
     }
 

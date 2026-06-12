@@ -1,6 +1,7 @@
 package io.github.interalexdev.openscholar.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,6 +12,7 @@ import java.util.List;
 @Table(name = "viewed_publications")
 @Getter
 @Setter
+@AllArgsConstructor
 public class ViewedPublication {
 
     @Id
