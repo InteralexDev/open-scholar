@@ -39,12 +39,17 @@ The Angular frontend communicates with a Spring Boot REST API, which retrieves p
 - Java 21
 - Spring Boot 3.5
 - Spring Web
+- Spring Data JPA
+- PostgreSQL 17
 - Maven
 
 ### Development
 
 - Docker Compose
-- PostgreSQL 17
+
+### API Documentation
+
+- Springdoc OpenAPI
 
 ## References
 
