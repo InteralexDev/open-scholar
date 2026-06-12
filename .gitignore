@@ -23,16 +23,16 @@ Thumbs.db
 # Java / Maven
 # =====================================
 
-target/
+**/target/
 
 # =====================================
 # Node.js / Angular
 # =====================================
 
-node_modules/
-dist/
-.angular/
-coverage/
+**/node_modules/
+**/dist/
+**/.angular/
+**/coverage/
 
 # =====================================
 # Environment

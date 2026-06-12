@@ -32,6 +32,15 @@ The Angular frontend communicates with a Spring Boot REST API, which retrieves p
 
 ![image](./docs/images/architecture.png)
 
+## Technology Stack
+
+### Backend
+
+- Java 21
+- Spring Boot 3.5
+- Spring Web
+- Maven
+
 ## References
 
 Diagrams were created using Lucidchart.
