@@ -13,9 +13,9 @@ public class DublinCoreExportService {
     private final DublinCoreMapper dublinCoreMapper;
     private final XmlMapper xmlMapper;
 
-    public DublinCoreExportService(DublinCoreMapper dublinCoreMapper) {
+    public DublinCoreExportService(DublinCoreMapper dublinCoreMapper, XmlMapper xmlMapper) {
         this.dublinCoreMapper = dublinCoreMapper;
-        this.xmlMapper = new XmlMapper();
+        this.xmlMapper = xmlMapper;
     }
 
     public String export(PublicationMetadata metadata) {
