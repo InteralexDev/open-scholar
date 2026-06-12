@@ -41,6 +41,11 @@ The Angular frontend communicates with a Spring Boot REST API, which retrieves p
 - Spring Web
 - Maven
 
+### Development
+
+- Docker Compose
+- PostgreSQL 17
+
 ## References
 
 Diagrams were created using Lucidchart.
