@@ -2,6 +2,7 @@ package io.github.interalexdev.openscholar.controller;
 
 import io.github.interalexdev.openscholar.model.PublicationMetadata;
 import io.github.interalexdev.openscholar.service.PublicationService;
+import io.github.interalexdev.openscholar.service.ViewedPublicationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
@@ -14,9 +15,11 @@ import java.util.List;
 public class PublicationController {
 
     private final PublicationService publicationService;
+    private final ViewedPublicationService viewedPublicationService;
 
-    public PublicationController(PublicationService publicationService) {
+    public PublicationController(PublicationService publicationService, ViewedPublicationService viewedPublicationService) {
         this.publicationService = publicationService;
+        this.viewedPublicationService = viewedPublicationService;
     }
 
     /**
@@ -34,6 +37,16 @@ public class PublicationController {
             @RequestParam String query
     ) {
         return publicationService.searchPublications(query);
+    }
+
+    @Operation(
+            summary = "Get recently viewed publications",
+            description = "Returns the 10 most recently viewed publications stored locally in the database."
+    )
+    @GetMapping("/viewed")
+    public List<PublicationMetadata> getRecentlyViewedPublications() {
+        System.out.println("VIEWED ENDPOINT CALLED");
+        return viewedPublicationService.getRecentlyViewedPublications();
     }
 
     @GetMapping("/{openAlexId}")

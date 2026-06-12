@@ -5,8 +5,10 @@ import io.github.interalexdev.openscholar.mapper.ViewedPublicationMapper;
 import io.github.interalexdev.openscholar.model.PublicationMetadata;
 import io.github.interalexdev.openscholar.repository.ViewedPublicationRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class ViewedPublicationService {
@@ -36,4 +38,13 @@ public class ViewedPublicationService {
         publication.setViewedAt(LocalDateTime.now());
         viewedPublicationRepository.save(publication);
     }
+
+    @Transactional(readOnly = true)
+    public List<PublicationMetadata> getRecentlyViewedPublications() {
+        return viewedPublicationRepository.findTop10ByOrderByViewedAtDesc()
+                .stream()
+                .map(viewedPublicationMapper::toPublicationMetadata)
+                .toList();
+    }
+
 }

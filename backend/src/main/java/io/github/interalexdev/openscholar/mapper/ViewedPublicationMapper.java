@@ -5,6 +5,7 @@ import io.github.interalexdev.openscholar.model.PublicationMetadata;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Component
 public class ViewedPublicationMapper {
@@ -30,4 +31,24 @@ public class ViewedPublicationMapper {
 
         return publication;
     }
+
+    public PublicationMetadata toPublicationMetadata(ViewedPublication publication) {
+        return new PublicationMetadata(
+                publication.getOpenAlexId(),
+                publication.getDoi(),
+                publication.getTitle(),
+                publication.getPublicationYear(),
+                publication.getPublicationDate(),
+                publication.getType(),
+                List.copyOf(publication.getAuthors()),
+                publication.getJournalName(),
+                publication.getPublisher(),
+                publication.getLanguage(),
+                List.copyOf(publication.getKeywords()),
+                List.copyOf(publication.getTopics()),
+                publication.getCitedByCount(),
+                publication.getSourceUrl()
+        );
+    }
+
 }
