@@ -13,10 +13,12 @@ public class PublicationService {
 
     private final OpenAlexClient openAlexClient;
     private final OpenAlexMapper openAlexMapper;
+    private final ViewedPublicationService viewedPublicationService;
 
-    public PublicationService(OpenAlexClient openAlexClient, OpenAlexMapper openAlexMapper) {
+    public PublicationService(OpenAlexClient openAlexClient, OpenAlexMapper openAlexMapper, ViewedPublicationService viewedPublicationService) {
         this.openAlexClient = openAlexClient;
         this.openAlexMapper = openAlexMapper;
+        this.viewedPublicationService = viewedPublicationService;
     }
 
     public List<PublicationMetadata> searchPublications(String query) {
@@ -33,9 +35,10 @@ public class PublicationService {
         PublicationMetadata publication =
                 openAlexMapper.toPublicationMetadata(work);
 
-        // sauvegarde viendra juste après
-        // viewedPublicationService.save(publication);
+        viewedPublicationService.saveOrUpdate(publication);
 
         return publication;
     }
+
+
 }
