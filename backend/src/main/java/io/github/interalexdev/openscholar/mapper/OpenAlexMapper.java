@@ -17,14 +17,70 @@ public class OpenAlexMapper {
                 work.publicationYear(),
                 work.publicationDate(),
                 work.type(),
-                List.of(),
-                null,
-                null,
+                mapAuthors(work),
+                getJournalName(work),
+                getPublisher(work),
                 work.language(),
-                List.of(),
-                List.of(),
+                mapKeywords(work),
+                mapTopics(work),
                 work.citedByCount(),
-                null
+                getSourceUrl(work)
         );
+    }
+
+    private List<String> mapAuthors(OpenAlexWorkDto work) {
+        if (work.authorships() == null) {
+            return List.of();
+        }
+
+        return work.authorships().stream()
+                .map(authorship -> authorship.author())
+                .filter(author -> author != null)
+                .map(author -> author.displayName())
+                .toList();
+    }
+
+    private List<String> mapKeywords(OpenAlexWorkDto work) {
+        if (work.keywords() == null) {
+            return List.of();
+        }
+
+        return work.keywords().stream()
+                .map(keyword -> keyword.displayName())
+                .toList();
+    }
+
+    private List<String> mapTopics(OpenAlexWorkDto work) {
+        if (work.topics() == null) {
+            return List.of();
+        }
+
+        return work.topics().stream()
+                .map(topic -> topic.displayName())
+                .toList();
+    }
+
+    private String getJournalName(OpenAlexWorkDto work) {
+        if (work.primaryLocation() == null || work.primaryLocation().source() == null) {
+            return null;
+        }
+
+        return work.primaryLocation().source().displayName();
+    }
+
+    private String getPublisher(OpenAlexWorkDto work) {
+        if (work.primaryLocation() == null || work.primaryLocation().source() == null) {
+            return null;
+        }
+
+        return work.primaryLocation().source().hostOrganizationName();
+    }
+
+    private String getSourceUrl(OpenAlexWorkDto work) {
+        if (work.primaryLocation() == null) {
+            return null;
+        }
+
+        return work.primaryLocation().landingPageUrl();
     }
 }
