@@ -11,4 +11,6 @@ public interface ViewedPublicationRepository extends JpaRepository<ViewedPublica
     Optional<ViewedPublication> findByOpenAlexId(String openAlexId);
 
     List<ViewedPublication> findTop10ByOrderByViewedAtDesc();
+
+    List<ViewedPublication> findAllByOrderByViewedAtDesc();
 }

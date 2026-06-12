@@ -24,14 +24,31 @@ public class ViewedPublicationService {
         this.viewedPublicationMapper = viewedPublicationMapper;
     }
 
+    private void keepOnlyLast10() {
+        List<ViewedPublication> publications =
+                viewedPublicationRepository.findAllByOrderByViewedAtDesc();
+
+        if (publications.size() <= 10) {
+            return;
+        }
+
+        List<ViewedPublication> publicationsToDelete =
+                publications.subList(10, publications.size());
+
+        viewedPublicationRepository.deleteAll(publicationsToDelete);
+    }
+
+    @Transactional
     public void saveOrUpdate(PublicationMetadata metadata) {
         viewedPublicationRepository.findByOpenAlexId(metadata.openAlexId())
                 .ifPresentOrElse(
-                        publication -> updateViewedAt(publication),
+                        this::updateViewedAt,
                         () -> viewedPublicationRepository.save(
                                 viewedPublicationMapper.toViewedPublication(metadata)
                         )
                 );
+
+        keepOnlyLast10();
     }
 
     private void updateViewedAt(ViewedPublication publication) {
