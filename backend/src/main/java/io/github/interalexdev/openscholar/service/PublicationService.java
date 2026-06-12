@@ -14,11 +14,13 @@ public class PublicationService {
     private final OpenAlexClient openAlexClient;
     private final OpenAlexMapper openAlexMapper;
     private final ViewedPublicationService viewedPublicationService;
+    private final DublinCoreExportService dublinCoreExportService;
 
-    public PublicationService(OpenAlexClient openAlexClient, OpenAlexMapper openAlexMapper, ViewedPublicationService viewedPublicationService) {
+    public PublicationService(OpenAlexClient openAlexClient, OpenAlexMapper openAlexMapper, ViewedPublicationService viewedPublicationService, DublinCoreExportService dublinCoreExportService) {
         this.openAlexClient = openAlexClient;
         this.openAlexMapper = openAlexMapper;
         this.viewedPublicationService = viewedPublicationService;
+        this.dublinCoreExportService = dublinCoreExportService;
     }
 
     public List<PublicationMetadata> searchPublications(String query) {
@@ -43,6 +45,13 @@ public class PublicationService {
     public PublicationMetadata exportPublicationJson(String openAlexId) {
         OpenAlexWorkDto dto = openAlexClient.getPublicationDetails(openAlexId);
         return openAlexMapper.toPublicationMetadata(dto);
+    }
+
+    public String exportPublicationDublinCore(String openAlexId) {
+        OpenAlexWorkDto dto = openAlexClient.getPublicationDetails(openAlexId);
+        PublicationMetadata metadata = openAlexMapper.toPublicationMetadata(dto);
+
+        return dublinCoreExportService.export(metadata);
     }
 
 }

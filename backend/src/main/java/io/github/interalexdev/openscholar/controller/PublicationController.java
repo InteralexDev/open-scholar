@@ -71,4 +71,15 @@ public class PublicationController {
         return publicationService.exportPublicationJson(openAlexId);
     }
 
+    @GetMapping("/{openAlexId}/export/dublin-core")
+    @Operation(
+            summary = "Export publication as Dublin Core XML",
+            description = "Retrieves publication metadata from OpenAlex and exports it as Dublin Core XML without saving it locally."
+    )
+    public String exportPublicationXML(
+            @PathVariable String openAlexId
+    ) {
+        return publicationService.exportPublicationDublinCore(openAlexId);
+    }
+
 }
