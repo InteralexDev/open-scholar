@@ -16,3 +16,6 @@ spring:
 logging:
   level:
     org.springframework.jdbc: info
+
+openalex:
+  base-url: https://api.openalex.org
