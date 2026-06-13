@@ -1,10 +1,12 @@
 package io.github.interalexdev.openscholar.dto.openalex;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 import java.util.Map;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public record OpenAlexWorkDto(
 
         String id,

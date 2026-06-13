@@ -1,7 +1,9 @@
 package io.github.interalexdev.openscholar.dto.openalex;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public record OpenAlexKeywordDto(
 
         String id,
