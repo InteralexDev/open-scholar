@@ -35,4 +35,16 @@ export class PublicationService {
       headers: this.jsonHeaders,
     });
   }
+
+  exportJson(openAlexId: string): Observable<Blob> {
+    return this.http.get(`${this.apiUrl}/${openAlexId}/export/json`, {
+      responseType: 'blob',
+    });
+  }
+
+  exportDublinCore(openAlexId: string): Observable<Blob> {
+    return this.http.get(`${this.apiUrl}/${openAlexId}/export/dublin-core`, {
+      responseType: 'blob',
+    });
+  }
 }

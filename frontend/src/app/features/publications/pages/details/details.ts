@@ -19,16 +19,18 @@ export class Details {
   readonly loading = signal(true);
   readonly error = signal<string | null>(null);
 
-  constructor() {
-    const openAlexId = this.route.snapshot.paramMap.get('openAlexId');
+  private readonly openAlexId: string | null;
 
-    if (!openAlexId) {
+  constructor() {
+    this.openAlexId = this.route.snapshot.paramMap.get('openAlexId');
+
+    if (!this.openAlexId) {
       this.error.set('Publication identifier is missing.');
       this.loading.set(false);
       return;
     }
 
-    this.publicationService.getDetails(openAlexId).subscribe({
+    this.publicationService.getDetails(this.openAlexId).subscribe({
       next: publication => {
         this.publication.set(publication);
         this.loading.set(false);
@@ -36,11 +38,42 @@ export class Details {
       error: () => {
         this.error.set('An error occurred while loading publication details.');
         this.loading.set(false);
-      }
+      },
     });
   }
 
   goBack(): void {
     this.router.navigate(['/publications/search']);
+  }
+
+  exportJson(): void {
+    if (!this.openAlexId) {
+      return;
+    }
+
+    this.publicationService.exportJson(this.openAlexId).subscribe({
+      next: file => this.downloadFile(file, 'publication.json'),
+    });
+  }
+
+  exportDublinCore(): void {
+    if (!this.openAlexId) {
+      return;
+    }
+
+    this.publicationService.exportDublinCore(this.openAlexId).subscribe({
+      next: file => this.downloadFile(file, 'publication-dublin-core.xml'),
+    });
+  }
+
+  private downloadFile(file: Blob, filename: string): void {
+    const url = window.URL.createObjectURL(file);
+    const link = document.createElement('a');
+
+    link.href = url;
+    link.download = filename;
+    link.click();
+
+    window.URL.revokeObjectURL(url);
   }
 }

@@ -88,13 +88,15 @@
   </article>
 
   <section class="export-actions">
-    <button type="button">
-      Export JSON
-    </button>
+    <section class="export-actions">
+      <button type="button" (click)="exportJson()">
+        Export JSON
+      </button>
 
-    <button type="button">
-      Export Dublin Core XML
-    </button>
+      <button type="button" (click)="exportDublinCore()">
+        Export Dublin Core XML
+      </button>
+    </section>
   </section>
 </main>
 }
