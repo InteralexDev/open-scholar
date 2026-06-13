@@ -146,6 +146,8 @@ Content-Type: application/xml
 - Docker
 - Docker Compose
 
+---
+
 ### Clone the repository
 
 ```bash
@@ -153,6 +155,7 @@ git clone https://github.com/interalexDev/open-scholar.git
 cd open-scholar
 ```
 
+---
 
 ### Option 1: Local Development (Recommended)
 
@@ -186,6 +189,8 @@ The application will be available at:
 | Backend API | http://localhost:8080 |
 | Swagger UI | http://localhost:8080/swagger-ui/index.html |
 
+---
+
 ### Option 2: Fully Containerized
 
 Build and start the complete application stack:
@@ -213,6 +218,8 @@ The application will be available at:
 | Frontend | http://localhost:4200 |
 | Backend API | http://localhost:8080 |
 | Swagger UI | http://localhost:8080/swagger-ui/index.html |
+
+---
 
 ### Stop the application
 
