@@ -1,0 +1,19 @@
+<article
+  class="publication-card"
+  [class.compact]="compact()"
+  (click)="selectPublication()"
+>
+  <h3>{{ publication().title }}</h3>
+
+  @if (!compact()) {
+  <p>
+    <strong>Authors:</strong>
+    {{ publication().authors.join(', ') || 'Unknown' }}
+  </p>
+  }
+
+  <p>
+    <strong>Year:</strong>
+    {{ publication().publicationYear || 'Unknown' }}
+  </p>
+</article>

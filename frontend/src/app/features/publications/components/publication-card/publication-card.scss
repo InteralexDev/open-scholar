@@ -1,0 +1,23 @@
+.publication-card {
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 0.75rem;
+  cursor: pointer;
+}
+
+.publication-card:hover {
+  transform: translateY(-1px);
+}
+
+.publication-card h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+}
+
+.publication-card p {
+  margin: 0.5rem 0 0;
+}
+
+.publication-card.compact p {
+  margin: 0;
+}

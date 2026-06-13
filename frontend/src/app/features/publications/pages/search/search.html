@@ -39,22 +39,10 @@
         }
 
         @for (publication of results(); track publication.openAlexId) {
-        <article
-          class="publication-card"
-          (click)="openDetails(publication.openAlexId)"
-        >
-          <h3>{{ publication.title }}</h3>
-
-          <p>
-            <strong>Authors:</strong>
-            {{ publication.authors.join(', ') || 'Unknown' }}
-          </p>
-
-          <p>
-            <strong>Year:</strong>
-            {{ publication.publicationYear || 'Unknown' }}
-          </p>
-        </article>
+        <app-publication-card
+          [publication]="publication"
+          (selected)="openDetails($event)"
+        />
         }
       </section>
     </section>
@@ -75,16 +63,11 @@
       }
 
       @for (publication of viewedPublications(); track publication.openAlexId) {
-      <article
-        class="history-card"
-        (click)="openDetails(publication.openAlexId)"
-      >
-        <h3>{{ publication.title }}</h3>
-
-        <p>
-          {{ publication.publicationYear || 'Unknown year' }}
-        </p>
-      </article>
+      <app-publication-card
+        [publication]="publication"
+        [compact]="true"
+        (selected)="openDetails($event)"
+      />
       }
     </aside>
   </section>

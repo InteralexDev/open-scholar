@@ -4,10 +4,11 @@ import { Router } from '@angular/router';
 
 import { PublicationMetadata } from '../../../../core/models/publication-metadata.model';
 import { PublicationService } from '../../../../core/services/publication.service';
+import { PublicationCard } from '../../components/publication-card/publication-card';
 
 @Component({
   selector: 'app-search',
-  imports: [FormsModule],
+  imports: [FormsModule, PublicationCard],
   templateUrl: './search.html',
   styleUrl: './search.scss',
 })
