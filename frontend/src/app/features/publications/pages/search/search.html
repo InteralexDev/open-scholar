@@ -61,7 +61,31 @@
 
     <aside class="viewed-history">
       <h2>Recently Viewed</h2>
+
+      @if (historyLoading()) {
+      <p>Loading recently viewed publications...</p>
+      }
+
+      @if (historyError()) {
+      <p>{{ historyError() }}</p>
+      }
+
+      @if (!historyLoading() && viewedPublications().length === 0) {
       <p>No recently viewed publications yet.</p>
+      }
+
+      @for (publication of viewedPublications(); track publication.openAlexId) {
+      <article
+        class="history-card"
+        (click)="openDetails(publication.openAlexId)"
+      >
+        <h3>{{ publication.title }}</h3>
+
+        <p>
+          {{ publication.publicationYear || 'Unknown year' }}
+        </p>
+      </article>
+      }
     </aside>
   </section>
 </main>

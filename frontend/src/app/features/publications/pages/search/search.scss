@@ -58,6 +58,26 @@
   background-color: #f8fafc;
 }
 
+.history-card {
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 0.75rem;
+  cursor: pointer;
+}
+
+.history-card + .history-card {
+  margin-top: 1rem;
+}
+
+.history-card h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+}
+
+.history-card p {
+  margin: 0;
+}
+
 @media (max-width: 900px) {
   .search-page {
     padding: 1rem;
