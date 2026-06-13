@@ -32,7 +32,11 @@ public class OpenAlexClient {
                 )
                 .messageConverters(converters -> {
                     converters.removeIf(MappingJackson2HttpMessageConverter.class::isInstance);
-                    converters.add(new MappingJackson2HttpMessageConverter(JsonMapper.builder().build()));
+                    converters.add(
+                            new MappingJackson2HttpMessageConverter(
+                                    JsonMapper.builder().build()
+                            )
+                    );
                 })
                 .build();
     }
@@ -53,9 +57,19 @@ public class OpenAlexClient {
         return restClient.get()
                 .uri(uriBuilder -> uriBuilder
                         .path(WORKS_PATH + "/{id}")
-                        .build(openAlexId))
+                        .build(extractWorkId(openAlexId)))
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
                 .body(OpenAlexWorkDto.class);
+    }
+
+    private String extractWorkId(String openAlexId) {
+        int lastSlash = openAlexId.lastIndexOf('/');
+
+        if (lastSlash == -1) {
+            return openAlexId;
+        }
+
+        return openAlexId.substring(lastSlash + 1);
     }
 }

@@ -8,14 +8,16 @@
     <section class="search-panel">
       <section class="search-bar">
         <h2>Search publications</h2>
+
         <div class="search-form">
           <input
             id="search-query"
             type="text"
             placeholder="Search by title, DOI or author"
+            [(ngModel)]="searchQuery"
           />
 
-          <button type="button">
+          <button type="button" (click)="search()">
             Search
           </button>
         </div>
@@ -23,11 +25,43 @@
 
       <section class="search-results">
         <h2>Search Results</h2>
+
+        @if (loading()) {
+        <p>Searching publications...</p>
+        }
+
+        @if (error()) {
+        <p>{{ error() }}</p>
+        }
+
+        @if (!loading() && results().length === 0) {
+        <p>No results yet. Start by searching for a publication.</p>
+        }
+
+        @for (publication of results(); track publication.openAlexId) {
+        <article
+          class="publication-card"
+          (click)="openDetails(publication.openAlexId)"
+        >
+          <h3>{{ publication.title }}</h3>
+
+          <p>
+            <strong>Authors:</strong>
+            {{ publication.authors.join(', ') || 'Unknown' }}
+          </p>
+
+          <p>
+            <strong>Year:</strong>
+            {{ publication.publicationYear || 'Unknown' }}
+          </p>
+        </article>
+        }
       </section>
     </section>
 
     <aside class="viewed-history">
       <h2>Recently Viewed</h2>
+      <p>No recently viewed publications yet.</p>
     </aside>
   </section>
 </main>

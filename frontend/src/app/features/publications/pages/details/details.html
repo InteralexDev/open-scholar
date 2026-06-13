@@ -1,52 +1,100 @@
+@if (loading()) {
+<p>Loading publication details...</p>
+}
+
+@if (error()) {
+<p>{{ error() }}</p>
+}
+
+@if (publication(); as publication) {
 <main class="details-page">
   <header class="details-header">
-    <button type="button">← Back</button>
-    <h1>Publication details</h1>
+    <button type="button" (click)="goBack()">
+      ← Back
+    </button>
+
+    <h1>Publication Details</h1>
   </header>
 
   <article class="publication-details">
-    <h2>Publication title</h2>
+    <h2>{{ publication.title }}</h2>
 
     <section class="metadata-section">
       <h3>Authors</h3>
-      <p>Author 1, Author 2</p>
+      <p>{{ publication.authors.join(', ') || 'Unknown' }}</p>
     </section>
 
     <section class="metadata-grid">
       <div>
         <h3>Journal</h3>
-        <p>Journal name</p>
+        <p>{{ publication.journalName || 'Unknown' }}</p>
       </div>
 
       <div>
         <h3>Publisher</h3>
-        <p>Publisher name</p>
+        <p>{{ publication.publisher || 'Unknown' }}</p>
       </div>
 
       <div>
-        <h3>Publication year</h3>
-        <p>2026</p>
+        <h3>Publication Year</h3>
+        <p>{{ publication.publicationYear || 'Unknown' }}</p>
+      </div>
+
+      <div>
+        <h3>Publication Date</h3>
+        <p>{{ publication.publicationDate || 'Unknown' }}</p>
       </div>
 
       <div>
         <h3>Language</h3>
-        <p>en</p>
+        <p>{{ publication.language || 'Unknown' }}</p>
+      </div>
+
+      <div>
+        <h3>Type</h3>
+        <p>{{ publication.type || 'Unknown' }}</p>
+      </div>
+
+      <div>
+        <h3>DOI</h3>
+        <p>{{ publication.doi || 'Unknown' }}</p>
+      </div>
+
+      <div>
+        <h3>OpenAlex ID</h3>
+        <p>{{ publication.openAlexId }}</p>
       </div>
     </section>
 
     <section class="metadata-section">
       <h3>Keywords</h3>
-      <p>keyword, keyword, keyword</p>
+
+      @if (publication.keywords.length > 0) {
+      <p>{{ publication.keywords.join(', ') }}</p>
+      } @else {
+      <p>No keywords available.</p>
+      }
     </section>
 
     <section class="metadata-section">
       <h3>Topics</h3>
-      <p>topic, topic, topic</p>
+
+      @if (publication.topics.length > 0) {
+      <p>{{ publication.topics.join(', ') }}</p>
+      } @else {
+      <p>No topics available.</p>
+      }
     </section>
   </article>
 
   <section class="export-actions">
-    <button type="button">Export JSON</button>
-    <button type="button">Export Dublin Core XML</button>
+    <button type="button">
+      Export JSON
+    </button>
+
+    <button type="button">
+      Export Dublin Core XML
+    </button>
   </section>
 </main>
+}
