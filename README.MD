@@ -10,29 +10,7 @@ This project was created as a learning exercise to explore concepts commonly fou
 
 It is not intended to reproduce an existing repository solution but rather to demonstrate the use of modern Java and Angular technologies in a realistic domain-driven context.
 
----
-
-## Current Status
-
-### ✅ Backend implemented
-
-- OpenAlex API integration
-- Publication search
-- Publication details retrieval
-- Automatic viewed history persistence
-- Duplicate prevention
-- History limited to the 10 most recent publications
-- JSON export
-- Dublin Core XML export
-- PostgreSQL persistence
-- Flyway database migrations
-- REST API documentation with OpenAPI / Swagger
-- Unit and controller tests
-
----
-
-## Main Features
-
+## Features
 - Search publications through the OpenAlex API
 - Retrieve detailed publication metadata
 - Automatically persist viewed publications
@@ -41,16 +19,21 @@ It is not intended to reproduce an existing repository solution but rather to de
 - Keep only the 10 most recently viewed publications
 - Export publication metadata as JSON
 - Export publication metadata as Dublin Core XML
+- Responsive Angular frontend
 - REST API documented with Swagger / OpenAPI
 
----
+## Screenshots
+
+### Search Page
+![image](./docs/images/capture-search-page.png)
+
+### Publication Details Page
+![image](./docs/images/capture-details-page.png)
 
 ## User Flow
 The following diagram illustrates the main user journey through the application.
 
 ![image](./docs/images/user-flow.png)
-
----
 
 ## Architecture
 The application follows a simple client-server architecture.
@@ -59,9 +42,15 @@ The Angular frontend communicates with a Spring Boot REST API, which retrieves p
 
 ![image](./docs/images/architecture.png)
 
----
-
 ## Technology Stack
+
+### Frontend
+
+- Angular 21
+- TypeScript
+- Angular Signals
+- Angular Router
+- HttpClient
 
 ### Backend
 
@@ -83,8 +72,6 @@ The Angular frontend communicates with a Spring Boot REST API, which retrieves p
 
 - Maven
 - Docker Compose
-
----
 
 ## Backend API
 
@@ -149,9 +136,15 @@ Response:
 Content-Type: application/xml
 ```
 
----
-
 ## Getting Started
+
+### Prerequisites
+
+- Java 21
+- Node.js
+- npm
+- Docker
+- Docker Compose
 
 ### Clone the repository
 
@@ -160,39 +153,147 @@ git clone https://github.com/interalexDev/open-scholar.git
 cd open-scholar
 ```
 
-### Start PostgreSQL
+
+### Option 1: Local Development (Recommended)
+
+#### Start PostgreSQL
 
 ```bash
+cd database
 docker compose up -d
 ```
 
-### Run the backend
+#### Run the backend
 
 ```bash
 cd backend
 ./mvnw spring-boot:run
 ```
 
-The REST API will be available at:
+#### Run the frontend
 
-```
-http://localhost:8080
-```
-
-Swagger UI:
-
-```
-http://localhost:8080/swagger-ui/index.html
+```bash
+cd frontend
+npm install
+ng serve
 ```
 
----
+The application will be available at:
+
+| Service | URL |
+|----------|-----|
+| Frontend | http://localhost:4200 |
+| Backend API | http://localhost:8080 |
+| Swagger UI | http://localhost:8080/swagger-ui/index.html |
+
+### Option 2: Fully Containerized
+
+Build and start the complete application stack:
+
+```bash
+docker compose up --build
+```
+
+Or run it in detached mode:
+
+```bash
+docker compose up -d --build
+```
+
+This starts:
+
+- PostgreSQL
+- Spring Boot backend
+- Angular frontend
+
+The application will be available at:
+
+| Service | URL |
+|----------|-----|
+| Frontend | http://localhost:4200 |
+| Backend API | http://localhost:8080 |
+| Swagger UI | http://localhost:8080/swagger-ui/index.html |
+
+### Stop the application
+
+#### Local database
+
+```bash
+cd database
+docker compose down
+```
+
+#### Fully containerized
+
+```bash
+docker compose down
+```
+
+
+## Project Structure
+```
+open-scholar/
+├── backend/
+│   ├── src/
+│   │   ├── main/
+│   │   │   ├── java/
+│   │   │   │   └── io/github/interalexdev/openscholar/
+│   │   │   │       ├── client/          # OpenAlex integration
+│   │   │   │       ├── configuration/   # Spring configuration
+│   │   │   │       ├── controller/      # REST controllers
+│   │   │   │       ├── dto/             # Data transfer objects
+│   │   │   │       ├── entity/          # JPA entities
+│   │   │   │       ├── mapper/          # Entity / domain mapping
+│   │   │   │       ├── model/           # Domain models
+│   │   │   │       ├── repository/      # Spring Data repositories
+│   │   │   │       └── service/         # Business logic
+│   │   │   │
+│   │   │   └── resources/
+│   │   │       ├── application.yaml     # Backend configuration
+│   │   │       └── db/
+│   │   │           └── migration/       # Flyway migrations
+│   │   │
+│   │   └── test/
+│   │       └── java/                    # Backend tests
+│   │
+│   ├── Dockerfile                       # Backend container image
+│   └── pom.xml
+│
+├── frontend/
+│   ├── src/
+│   │   ├── app/
+│   │   │   ├── core/
+│   │   │   │   ├── models/              # Shared application models
+│   │   │   │   └── services/            # HTTP services
+│   │   │   │
+│   │   │   └── features/
+│   │   │       └── publications/
+│   │   │           ├── components/      # Reusable UI components
+│   │   │           └── pages/           # Feature pages
+│   │   │
+│   │   ├── environments/                # Environment configuration
+│   │   └── styles.scss                  # Global styles
+│   │
+│   ├── Dockerfile                       # Frontend container image
+│   ├── nginx.conf                       # Nginx config for Angular app
+│   ├── package.json
+│   └── angular.json
+│
+├── docs/
+│   └── images/                          # Diagrams and screenshots
+│
+├── database/
+│   └── docker-compose.yml               # Standalone PostgreSQL instance for local development
+│
+├── docker-compose.yml                   # Full local stack
+├── README.md
+└── LICENSE
+```
 
 ## References
 
 - Publication data provided by the [OpenAlex](https://openalex.org) API
 - Diagrams were created using [Lucidchart](https://www.lucidchart.com).
-
----
 
 ## License
 
