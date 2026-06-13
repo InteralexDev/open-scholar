@@ -1,5 +1,4 @@
 .search-page {
-  min-height: 100vh;
   padding: 2rem;
 }
 
@@ -11,6 +10,7 @@
   display: grid;
   grid-template-columns: minmax(0, 3fr) minmax(280px, 1fr);
   gap: 2rem;
+  align-items: start; // <- ajouté
 }
 
 .search-panel {
