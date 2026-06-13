@@ -7,6 +7,9 @@ import io.github.interalexdev.openscholar.model.PublicationMetadata;
 import io.github.interalexdev.openscholar.model.export.DublinCoreDocument;
 import org.springframework.stereotype.Service;
 
+/**
+ * Provides XML export of publication metadata using the Dublin Core format.
+ */
 @Service
 public class DublinCoreExportService {
 

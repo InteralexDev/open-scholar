@@ -7,6 +7,10 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Maps OpenAlex publication metadata to a Dublin Core representation
+ * suitable for XML export.
+ */
 @Component
 public class DublinCoreMapper {
 
