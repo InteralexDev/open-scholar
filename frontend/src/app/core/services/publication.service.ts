@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
+import { environment } from '../../../environments/environment';
 import { PublicationMetadata } from '../models/publication-metadata.model';
 
 @Injectable({
@@ -9,7 +10,7 @@ import { PublicationMetadata } from '../models/publication-metadata.model';
 })
 export class PublicationService {
   private readonly http = inject(HttpClient);
-  private readonly apiUrl = 'http://localhost:8080/api/publications';
+  private readonly apiUrl = `${environment.apiUrl}/publications`;
   private readonly jsonHeaders = new HttpHeaders({
     Accept: 'application/json',
   });
