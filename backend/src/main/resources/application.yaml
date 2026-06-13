@@ -1,14 +1,14 @@
 server:
-  port: 8080
+  port: ${PORT:8080}
 
 spring:
   application:
     name: open-scholar-backend
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/openscholar
-    username: openscholar
-    password: openscholar
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/openscholar}
+    username: ${SPRING_DATASOURCE_USERNAME:openscholar}
+    password: ${SPRING_DATASOURCE_PASSWORD:openscholar}
 
   jpa:
     open-in-view: false
