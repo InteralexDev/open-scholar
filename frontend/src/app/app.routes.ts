@@ -9,14 +9,14 @@ export const routes: Routes = [
   {
     path: 'publications/search',
     loadComponent: () =>
-      import('./features/publications/pages/search/search.page')
-        .then(m => m.SearchPage)
+      import('./features/publications/pages/search/search')
+        .then(m => m.Search)
   },
   {
     path: 'publications/:openAlexId',
     loadComponent: () =>
-      import('./features/publications/pages/details/details.page')
-        .then(m => m.DetailsPage)
+      import('./features/publications/pages/details/details')
+        .then(m => m.Details)
   },
   {
     path: '**',
