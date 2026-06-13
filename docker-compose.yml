@@ -3,14 +3,35 @@ services:
     image: postgres:17-alpine
     container_name: open-scholar-postgres
     environment:
-      POSTGRES_DB: openscholar
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: open_scholar
+      POSTGRES_USER: open_scholar
+      POSTGRES_PASSWORD: open_scholar
     ports:
       - "5432:5432"
     volumes:
-      - postgres-data:/var/lib/postgresql/data
-    restart: unless-stopped
+      - open-scholar-postgres-data:/var/lib/postgresql/data
+
+  backend:
+    build:
+      context: ./backend
+    container_name: open-scholar-backend
+    depends_on:
+      - postgres
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/open_scholar
+      SPRING_DATASOURCE_USERNAME: open_scholar
+      SPRING_DATASOURCE_PASSWORD: open_scholar
+    ports:
+      - "8080:8080"
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: open-scholar-frontend
+    depends_on:
+      - backend
+    ports:
+      - "4200:80"
 
 volumes:
-  postgres-data:
+  open-scholar-postgres-data:

@@ -7,8 +7,8 @@ spring:
 
   datasource:
     url: jdbc:postgresql://localhost:5432/openscholar
-    username: postgres
-    password: postgres
+    username: openscholar
+    password: openscholar
 
   jpa:
     open-in-view: false
