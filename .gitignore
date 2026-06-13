@@ -5,6 +5,12 @@
 .idea/
 *.iml
 .vscode/
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
 
 # =====================================
 # Operating System
@@ -18,6 +24,9 @@ Thumbs.db
 # =====================================
 
 *.log
+npm-debug.log*
+yarn-error.log*
+testem.log
 
 # =====================================
 # Java / Maven
@@ -33,6 +42,16 @@ Thumbs.db
 **/dist/
 **/.angular/
 **/coverage/
+**/tmp/
+**/out-tsc/
+**/bazel-out/
+
+.sass-cache/
+.history/
+connect.lock
+libpeerconnection.log
+typings/
+__screenshots__/
 
 # =====================================
 # Environment
@@ -45,5 +64,4 @@ Thumbs.db
 # Temporary files
 # =====================================
 
-tmp/
 temp/
